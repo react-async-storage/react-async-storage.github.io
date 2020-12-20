@@ -5,19 +5,21 @@ sidebar_label: Usage
 slug: /usage/
 ---
 
-Before you can interact with your storage, it has to be configured and initiated.
+To begin using this library you have to create at least a single storage store. You can do this in several ways, with the recommended pattern being to use the `StorageProvider`, which is illustrated below.
+
+> Note: If you'd like to read-up on the other options, see the Advanced section.
 
 ### Using the StorageProvider
 
-The simplest way to do this, is to place the Provider component exported by this library as a wrapper inside the main App component:
+The storageProvider is a high level abstraction that encapsulates the `storageFactory` and injects the `StorageContext` to its tree of children. It should be placed high up in the component tree as a wrapper:
 
 ```jsx
 // App.js
-import { StorageProvider } from 'react-async-storage'
-import React from 'react'
+import { StorageProvider } from "react-async-storage";
+import React from "react";
 
 export default function App() {
-    return <StorageProvider>{/* Rest of your app code */}</StorageProvider>
+  return <StorageProvider>{/* Rest of your app code */}</StorageProvider>;
 }
 ```
 
@@ -25,21 +27,21 @@ The Provider does not need to be the top-most container in the App, but it shoul
 
 ```jsx
 // App.js
-import { StorageProvider } from 'react-async-storage'
-import React from 'react'
+import { StorageProvider } from "react-async-storage";
+import React from "react";
 
-import { MyReduxStoreProvider } from './store'
+import { MyReduxStoreProvider } from "./store";
 
 export default function App() {
-    return (
-        <React.Fragment>
-            <StorageProvider>
-                <MyReduxStoreProvider>
-                    {/* Rest of your app code */}
-                </MyReduxStoreProvider>
-            </StorageProvider>
-        </React.Fragment>
-    )
+  return (
+    <React.Fragment>
+      <StorageProvider>
+        <MyReduxStoreProvider>
+          {/* Rest of your app code */}
+        </MyReduxStoreProvider>
+      </StorageProvider>
+    </React.Fragment>
+  );
 }
 ```
 
@@ -72,7 +74,9 @@ export default function App() {
 }
 ```
 
-> Note: this is completely optional - if you do not pass configs, the library's DEFAULTS **(INSERT LINK)** will be used.
+> Note: this is completely optional - if you do not pass configs, the library's [DEFAULTS]() will be used.
+
+> Note: for details about the available configs, see the [Config Reference]()
 
 ### Using Storage
 
@@ -97,7 +101,7 @@ export default function MyComponent() {
   useEffect(() => {
     /*
       Interacting with the store for getItem/setItem/removeItem method calls is async.
-      It should therefore happen inside an async function call or a useEffect block inside a component.
+      It should therefore happen inside an async function, useEffect block or life-cycle hook.
     */
     ;(async () => {
       const cachedValue = await mainStore.getItem<MyInterface>("someCacheKey")
@@ -147,28 +151,29 @@ class MyComponent extends Component {
 The previous two options work nicely for react components, but what if you want to use a store outside of a react component? For this purpose you can use the `getStorage` helper. For example, this is a how it can be used inside a `Redux Thunk` async action:
 
 ```ts
-import { getStorage } from 'react-async-storage'
-import { TypedThunkResult, TypedThunkDispatch, User } from '../types'
-import ApiClient from '../api'
+import { getStorage } from "react-async-storage";
+import { TypedThunkResult, TypedThunkDispatch, User } from "../types";
+import ApiClient from "../api";
 
 export function getUser(): TypedThunkResult {
-    return async (dispatch: TypedThunkDispatch) => {
-        /*
+  return async (dispatch: TypedThunkDispatch) => {
+    /*
         getStorage receives an optional string as a parameter.
         If no parameter is provided it will try to return the default store name.
         */
-        const mainStore = getStorage('mainStore')
+    const mainStore = getStorage("mainStore");
 
-        const user = mainStore.hasItem('someKey')
-            ? await mainStore.getItem<User>('someKey')
-            : await ApiClient.get<User>('/user')
+    const user = mainStore.hasItem("someKey")
+      ? await mainStore.getItem<User>("someKey")
+      : await ApiClient.get<User>("/user");
 
-        dispatch({
-            type: SET_USER,
-            payload: user,
-        })
-    }
+    dispatch({
+      type: SET_USER,
+      payload: user,
+    });
+  };
 }
 ```
 
-**IMPORTANT** when using `getStorage`, care must be given to use it only in code that is called after the `StorageProvider` has been initialized. The simplest way to ensure this, is to wrap every place where `getStorage` is called inside the `StorageProvider`.
+:::important when using `getStorage`, care must be given to use it only in code that is called after the `StorageProvider` has been initialized.
+:::

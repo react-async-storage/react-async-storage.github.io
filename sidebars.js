@@ -1,4 +1,4 @@
 module.exports = {
-    'Getting Started': ['installation', 'usage', 'examples'],
+    'Getting Started': ['installation', 'usage', 'api'],
     'API Reference': [],
 }

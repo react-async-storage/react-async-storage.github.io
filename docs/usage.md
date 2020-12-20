@@ -7,26 +7,29 @@ slug: /usage/
 
 To begin using this library you have to create at least a single storage store. You can do this in several ways, with the recommended pattern being to use the `StorageProvider`, which is illustrated below.
 
-> Note: If you'd like to read-up on the other options, see the Advanced section.
+::: note If you'd like to read-up on the other options, see the Advanced section.
+:::
 
 ### Using the StorageProvider
 
 The storageProvider is a high level abstraction that encapsulates the `storageFactory` and injects the `StorageContext` to its tree of children. It should be placed high up in the component tree as a wrapper:
 
 ```jsx
-// App.js
 import { StorageProvider } from 'react-async-storage'
 import React from 'react'
 
 export default function App() {
-    return <StorageProvider>{/* Rest of your app code */}</StorageProvider>
+    return (
+        <React.Fragment>
+            <StorageProvider>{/* Rest of your app code */}</StorageProvider>
+        </React.Fragment>
+    )
 }
 ```
 
 The Provider does not need to be the top-most container in the App, but it should wrap all components that need to interact with the storage using the library's `useStorage` hook, and all code that needs to make calls to the async storage during the App's first render. For example:
 
 ```jsx
-// App.js
 import { StorageProvider } from 'react-async-storage'
 import React from 'react'
 
@@ -52,7 +55,6 @@ In the above example, the ReduxStoreProvider is located inside the StorageProvid
 You can pass configs to the provider using the `options` prop. This prop accepts either a config object or an array of config objects:
 
 ```jsx
-// App.js
 import { StorageProvider } from "react-async-storage"
 import React from 'react'
 
@@ -74,9 +76,9 @@ export default function App() {
 }
 ```
 
-> Note: this is completely optional - if you do not pass configs, the library's [DEFAULTS]() will be used.
-
-> Note: for details about the available configs, see the [Config Reference]()
+::: note this is completely optional - if you do not pass configs, the library's [DEFAULTS]() will be used.
+for details about the available configs, see the [Config Reference]()
+:::
 
 ### Using Storage
 

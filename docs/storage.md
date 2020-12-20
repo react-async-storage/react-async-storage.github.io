@@ -56,7 +56,8 @@ storage.getItem<T>(
 
 Sets a value in storage. The value is automatically serialized, so you do not need to call `JSON.stringify()`.
 
-> Note: If you want to serialized functions or classes with methods you will need to serialized them before calling setItem, because these cannot be serialized by the library.
+::: note If you want to serialized functions or classes with methods you will need to serialized them before calling setItem, because these cannot be serialized by the library.
+:::
 
 **Signature**:
 
@@ -233,7 +234,8 @@ storage.multiMerge(
 
 Clears all keys in the given store.
 
-> Note: only the store namespace is cleared. If you are using multiple stores, only the one on which you call `clear` will be affected.
+::: note only the store namespace is cleared. If you are using multiple stores, only the one on which you call `clear` will be affected.
+:::
 
 **Signature**:
 
@@ -247,7 +249,8 @@ storage.clear(): Promise<void>
 
 Returns all the keys in the store.
 
-> Note: keys are retrieved only for the given store's namespace.
+::: note keys are retrieved only for the given store's namespace.
+:::
 
 **Signature**:
 

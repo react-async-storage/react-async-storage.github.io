@@ -15,11 +15,11 @@ The storageProvider is a high level abstraction that encapsulates the `storageFa
 
 ```jsx
 // App.js
-import { StorageProvider } from "react-async-storage";
-import React from "react";
+import { StorageProvider } from 'react-async-storage'
+import React from 'react'
 
 export default function App() {
-  return <StorageProvider>{/* Rest of your app code */}</StorageProvider>;
+    return <StorageProvider>{/* Rest of your app code */}</StorageProvider>
 }
 ```
 
@@ -27,21 +27,21 @@ The Provider does not need to be the top-most container in the App, but it shoul
 
 ```jsx
 // App.js
-import { StorageProvider } from "react-async-storage";
-import React from "react";
+import { StorageProvider } from 'react-async-storage'
+import React from 'react'
 
-import { MyReduxStoreProvider } from "./store";
+import { MyReduxStoreProvider } from './store'
 
 export default function App() {
-  return (
-    <React.Fragment>
-      <StorageProvider>
-        <MyReduxStoreProvider>
-          {/* Rest of your app code */}
-        </MyReduxStoreProvider>
-      </StorageProvider>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+            <StorageProvider>
+                <MyReduxStoreProvider>
+                    {/* Rest of your app code */}
+                </MyReduxStoreProvider>
+            </StorageProvider>
+        </React.Fragment>
+    )
 }
 ```
 
@@ -151,27 +151,27 @@ class MyComponent extends Component {
 The previous two options work nicely for react components, but what if you want to use a store outside of a react component? For this purpose you can use the `getStorage` helper. For example, this is a how it can be used inside a `Redux Thunk` async action:
 
 ```ts
-import { getStorage } from "react-async-storage";
-import { TypedThunkResult, TypedThunkDispatch, User } from "../types";
-import ApiClient from "../api";
+import { getStorage } from 'react-async-storage'
+import { TypedThunkResult, TypedThunkDispatch, User } from '../types'
+import ApiClient from '../api'
 
 export function getUser(): TypedThunkResult {
-  return async (dispatch: TypedThunkDispatch) => {
-    /*
+    return async (dispatch: TypedThunkDispatch) => {
+        /*
         getStorage receives an optional string as a parameter.
         If no parameter is provided it will try to return the default store name.
         */
-    const mainStore = getStorage("mainStore");
+        const mainStore = getStorage('mainStore')
 
-    const user = mainStore.hasItem("someKey")
-      ? await mainStore.getItem<User>("someKey")
-      : await ApiClient.get<User>("/user");
+        const user = mainStore.hasItem('someKey')
+            ? await mainStore.getItem<User>('someKey')
+            : await ApiClient.get<User>('/user')
 
-    dispatch({
-      type: SET_USER,
-      payload: user,
-    });
-  };
+        dispatch({
+            type: SET_USER,
+            payload: user,
+        })
+    }
 }
 ```
 

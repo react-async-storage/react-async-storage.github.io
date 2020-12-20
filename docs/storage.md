@@ -45,8 +45,8 @@ storage.getItem<T>(
 
 `options`: The second parameter is an optional object that has two optional keys:
 
-- `fallback`: By default `getItem`returns `null` when no value is found for the given key. You can customize this by passing an optional fallback value as part of the options object.
-- `allowNull`: By default `getItem` will not throw an error if a value is not found for the given key and no fallback is provided. To change this, you can set `allowNull` to `true`, which will cause the function to throw a `CacheError` if no value is found.
+-   `fallback`: By default `getItem`returns `null` when no value is found for the given key. You can customize this by passing an optional fallback value as part of the options object.
+-   `allowNull`: By default `getItem` will not throw an error if a value is not found for the given key and no fallback is provided. To change this, you can set `allowNull` to `true`, which will cause the function to throw a `CacheError` if no value is found.
 
 `callback`: Node style callback.
 
@@ -78,20 +78,13 @@ storage.setItem<T>(
 `maxAge`: An optional maximum ttl after which the value will become stale. You can set this to either a millisecond value, or pass in an array in a more human readable format, e.g.:
 
 ```ts
-storage.setItem("key", {}, [1, "day"]);
+storage.setItem('key', {}, [1, 'day'])
 ```
 
 The first value of the array is a number representing an amount, the second value is a time-unit, with the accepted values being:
 
 ```ts
-type TimeUnit =
-  | "second"
-  | "minute"
-  | "hour"
-  | "day"
-  | "week"
-  | "month"
-  | "year";
+type TimeUnit = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'
 ```
 
 `callback`: Node style callback. _NOTE_ the value being passed to the callback for setItem is not the raw value but rather an instance of `CacheRecord`.
@@ -183,11 +176,11 @@ storage.multiSet(
 
 `values`: An array of objects, each representing a value to be stored:
 
-- `key`: The key to set for the given value (**required**)
+-   `key`: The key to set for the given value (**required**)
 
-- `value`: The value that is being stored. This can be either a value or a function that returns the given value. (**required**)
+-   `value`: The value that is being stored. This can be either a value or a function that returns the given value. (**required**)
 
-- `maxAge`: An optional maximum ttl after which the value will become stale. See the entry for [setItem](#/setItem) for details
+-   `maxAge`: An optional maximum ttl after which the value will become stale. See the entry for [setItem](#/setItem) for details
 
 <br />
 
@@ -230,9 +223,9 @@ storage.multiMerge(
 
 `values`: An array of objects, each representing a value to be merged:
 
-- `key`: The key of the value to be merged with (**required**)
+-   `key`: The key of the value to be merged with (**required**)
 
-- `value`: The value to merged with the stored value. (**required**)
+-   `value`: The value to merged with the stored value. (**required**)
 
 <br />
 

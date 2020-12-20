@@ -6,7 +6,7 @@ module.exports = {
     organizationName,
     projectName: `${organizationName}.github.io`,
     url: `https://${organizationName}.github.io`,
-    baseUrl: `/${organizationName}/`,
+    baseUrl: `/`,
     tagline: 'Ergonomic Async Storage for React and React Native',
     onBrokenLinks: 'throw',
     onBrokenMarkdownLinks: 'warn',

@@ -1,4 +1,15 @@
 module.exports = {
-  "Getting Started": ["installation", "usage"],
-  "API Reference": ["api_storage"],
+  docs: [
+    {
+      type: "category",
+      label: "Getting Started",
+      collapsed: false,
+      items: ["installation", "usage"],
+    },
+    {
+      type: "category",
+      label: "API Reference",
+      items: ["storage"],
+    },
+  ],
 };

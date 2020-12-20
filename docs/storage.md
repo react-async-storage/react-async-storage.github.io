@@ -1,8 +1,9 @@
 ---
-id: api_storage
+id: storage
 title: Storage API Reference
+hide_title: true
 sidebar_label: Storage API
-slug: /api-storage/
+slug: /storage/
 ---
 
 # StorageWrapper

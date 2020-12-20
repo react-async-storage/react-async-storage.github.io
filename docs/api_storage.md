@@ -1,8 +1,8 @@
 ---
-id: api
-title: Api Reference
-sidebar_label: Api Reference
-slug: /api/
+id: api_storage
+title: Storage API Reference
+sidebar_label: Storage API
+slug: /api-storage/
 ---
 
 # StorageWrapper
@@ -197,7 +197,7 @@ Convenience method to batch removes values from storage.
 **Signature**:
 
 ```ts
-storage.multiGet(
+storage.multiRemove(
     keys: string[],
 ): Promise<void>
 ```
@@ -205,5 +205,60 @@ storage.multiGet(
 **Parameters**
 
 `keys`: An array of keys of values to be removed (**required**)
+
+<br />
+
+## `multiMerge`
+
+Convenience method to batch merge values.
+
+Returns a 3-dimensional array (array of arrays), with the first value in the array being the key and the second value being the merged result.
+
+**Signature**:
+
+```ts
+storage.multiMerge(
+    values: {
+        key: string
+        value: any
+    }[],
+): Promise<[string, any][]>
+```
+
+**Parameters**
+
+`values`: An array of objects, each representing a value to be merged:
+
+- `key`: The key of the value to be merged with (**required**)
+
+- `value`: The value to merged with the stored value. (**required**)
+
+<br />
+
+## `clear`
+
+Clears all keys in the given store.
+
+_NOTE_: only the store namespace is cleared. If you are using multiple stores, only the one on which you call `clear` will be affected.
+
+**Signature**:
+
+```ts
+storage.clear(): Promise<void>
+```
+
+<br />
+
+## `keys`
+
+Returns all the keys in the store.
+
+_NOTE_: keys are retrieved only for the given store's namespace.
+
+**Signature**:
+
+```ts
+storage.keys(): Promise<string[]>
+```
 
 <br />

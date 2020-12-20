@@ -1,4 +1,4 @@
 module.exports = {
-    'Getting Started': ['installation', 'usage', 'api'],
-    'API Reference': [],
-}
+  "Getting Started": ["installation", "usage"],
+  "API Reference": ["api_storage"],
+};

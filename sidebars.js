@@ -4,7 +4,7 @@ module.exports = {
             type: 'category',
             label: 'Getting Started',
             collapsed: false,
-            items: ['installation', 'usage'],
+            items: ['installation', 'usage', 'configuration'],
         },
         {
             type: 'category',

@@ -76,8 +76,8 @@ export default function App() {
 }
 ```
 
-::: note this is completely optional - if you do not pass configs, the library's [DEFAULTS]() will be used.
-for details about the available configs, see the [Config Reference]()
+::: note this is completely optional - if you do not pass configs, the library's defaults will be used.
+for details about the available configs, see the [configuration reference](./configuration.md)
 :::
 
 ### Using Storage
